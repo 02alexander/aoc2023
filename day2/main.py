@@ -28,8 +28,6 @@ def p1():
             sm += gi+1
     print(sm)
 
-
-
 def p2():
     sm = 0
     for (gi, line) in enumerate(lines):
@@ -50,8 +48,8 @@ def p2():
             limits[idx] = max(n, limits[idx])
         print(limits)
         sm += limits[0]*limits[1]*limits[2]
-
-    print(sm)  
+    print(sm)
+  
 
 # p1()
 p2()

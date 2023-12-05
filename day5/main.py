@@ -5,6 +5,7 @@ from collections import defaultdict
 
 with open(sys.argv[1]) as f:
     lines = [line.strip() for line in f.readlines()]
+lines.append("")
 print("------------------------------------------------------")
 
 
@@ -25,36 +26,26 @@ def p1():
         return l
 
     orig_seeds = [int(p) for p in lines[0][7:].split()]
+    seeds = orig_seeds
 
-    for i in range(0, len(orig_seeds), 2):
-        first = orig_seeds[i]
-        last = orig_seeds[i+1]
-        seeds = [first, last]
-        print(seeds)
+    cur_line = 2
+    cur_ranges = []
+    while cur_line < len(lines):
+        line = lines[cur_line]
+        cur_line += 1
 
-        cur_line = 2
-        cur_ranges = []
-        while cur_line < len(lines):
-            line = lines[cur_line]
-            cur_line += 1
+        if line == "":
+            seeds = mp(cur_ranges, seeds)
+            cur_ranges = []
+        elif not line[0].isdigit():
+            continue
+        else:
+            cur_ranges.append(tuple(map(int, line.split())))
 
-            # print(line + "\n")
-            if line == "":
-                # print(seeds)
-                # print(cur_ranges)
-                seeds = mp(cur_ranges, seeds)
-                # print(seeds)
-                # print()
-                cur_ranges = []
-            elif not line[0].isdigit():
-                continue
-            else:
-                cur_ranges.append(tuple(map(int, line.split())))
+    print(seeds)
+    print(min(seeds))
 
-        print(seeds)
-        print(min(seeds))
-
-
+"""
 def p2():
     def intersection(range1, range2):
         s = sorted([range1, range2], key=lambda tpl: tpl[0])
@@ -137,35 +128,63 @@ def p2():
             cur_ranges.append(tuple(map(int, line.split())))
         
     print(min(t[0] for t in cur_seeds))
-
+"""
 p1()
 # p2()
 
+# def mp(range_maps, init_values):
+#     l = []
+
+#     for v in init_values:
+#         is_found = False
+#         for (start_end, start_from, step) in range_maps:
+#             if start_from <= v < start_from + step:
+#                 l.append(start_end + v-start_from)
+#                 is_found = True
+#         if not is_found:
+#             l.append(v)
+    
+#     return l
 
 # orig_seeds = [int(p) for p in lines[0][7:].split()]
 # points_of_interest = []
+# m = 10**15
 # for i in range(0, len(orig_seeds), 2):
-#     points_of_interest.append((orig_seeds[i], orig_seeds[i]+orig_seeds[i]))
+#     poi = []
+#     poi.append(orig_seeds[i])
+#     poi.append(orig_seeds[i]+orig_seeds[i+1])
 
-# mappings = []
-# cur_line = 2
-# cur_ranges = []
-# while cur_line < len(lines):
-#     line = lines[cur_line]
-#     cur_line += 1
+#     mappings = []
+#     cur_line = 2
+#     cur_ranges = []
+#     while cur_line < len(lines):
+#         line = lines[cur_line]
+#         cur_line += 1
 
-#     if line == "":
-#         mappings.append(cur_ranges)
-#         cur_ranges = []
-#     elif not line[0].isdigit():
-#         continue
-#     else:
-#         cur_ranges.append(tuple(map(int, line.split())))
+#         if line == "":
+#             mappings.append(cur_ranges)
+#             cur_ranges = []
+#         elif not line[0].isdigit():
+#             continue
+#         else:
+#             cur_ranges.append(tuple(map(int, line.split())))
 
-# poi = points_of_interest
-# for mapping in mappings:
-#     new_poi = []
-#     for i in range(len(poi)-1):
-#         for (dst, src, n) in mapping:
-#             if poi[i] < src < poi[i+1]:
-#                 new_poi.append(src)
+#     print(f"poi={poi}")
+#     for mapping in mappings:
+#         new_poi = poi
+#         for i in range(len(poi)-1):
+#             for (dst, src, n) in mapping:
+#                 if poi[i] < src < poi[i+1]:
+#                     new_poi.append(src)
+#                     new_poi.append(src-1)
+#                 if poi[i] < dst < poi[i+1]:
+#                     new_poi.append(dst)
+#                     new_poi.append(dst+1)
+            
+#         new_poi.sort()
+#         print(new_poi)
+#         print(len(poi))
+#         poi = mp(mapping, new_poi)
+
+#     m = min(min(poi), m)
+# print(m)

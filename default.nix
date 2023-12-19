@@ -1,5 +1,5 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
-    packages = with pkgs; [ inotify-tools];
+    packages = with pkgs; [ inotify-tools reflex];
 
 }

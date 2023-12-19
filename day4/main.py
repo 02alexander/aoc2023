@@ -2,8 +2,9 @@
 
 import sys
 
-lines = [line.strip() for line in sys.stdin.readlines()]
-# numbs = list(map(int, lines))
+with open(sys.argv[1]) as f:
+    lines = [line.strip() for line in f.readlines()]
+print("-------------------------------------------")
 
 sm = 0
 ncards = 1

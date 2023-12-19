@@ -62,10 +62,7 @@ def p2():
             continue
         else:
             cur_ranges.append(tuple(map(int, line.split())))
-
     inv_mpings = [inverse_mapping(mp) for mp in mappings][::-1]
-
-
     orig_seeds = [int(p) for p in lines[0][7:].split()]
     points_of_interest = []
     m = 10**15
@@ -73,7 +70,6 @@ def p2():
         poi = []
         poi.append(orig_seeds[i])
         poi.append(orig_seeds[i]+orig_seeds[i+1])
-
         for mapping in mappings:
             new_poi = poi
             for k in range(len(poi)-1):
@@ -84,17 +80,14 @@ def p2():
                     if poi[k] < dst < poi[k+1]:
                         new_poi.append(dst)
                         new_poi.append(dst+1)
-                
             new_poi.sort()
             poi = mp(mapping, new_poi)
-
         for p in poi:
             orig = p
             for inv_mp in inv_mpings:
                 p = mp(inv_mp, [p])[0]
             if orig_seeds[i] <= p < orig_seeds[i]+orig_seeds[i+1]:
                 m = min(m, orig)
-
     return m
 
 print(p1())

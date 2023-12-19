@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 import sys
+import re
 
 lines = [line.strip()+"." for line in sys.stdin.readlines()]
-# numbs = list(map(int, lines))
+# data = [[int(i) for i in re.findall(r'-?\d+', row)] for row in lines]
 
 
 star_cords = set()
@@ -13,7 +14,7 @@ for (row, line) in enumerate(lines):
             star_cords.add((row, col))
 
 print(star_cords)
-
+risetnrst
 part_numbers = {}
 
 sm = 0

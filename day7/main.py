@@ -10,7 +10,6 @@ with open(sys.argv[1]) as f:
 lines.append("")
 print("------------------------------------------------------")
 
-
 def is_type(cards, type):
     d = defaultdict(int)
     for c in cards:
@@ -29,7 +28,6 @@ def ranking(cards):
             j_pos.append(i)
     combs = list(product(["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K","A"], repeat=len(j_pos)))
     highest = raw_ranking(cards)
-    # print()
     for comb in combs:
         res =""
         for (i, c) in enumerate(cards):
@@ -37,9 +35,7 @@ def ranking(cards):
                 res += comb[j_pos.index(i)]
             else:
                 res += c
-        # print(res)
         highest = max(raw_ranking(res), highest)
-
     return highest
 
 def raw_ranking(cards):

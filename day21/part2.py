@@ -89,13 +89,6 @@ for row in range(h):
         if p not in dsts:
             continue
 
-        real_sm = 0
-        for k in range(0, 2*repeat+1):
-            for j in range(0, 2*repeat+1):
-                cur = (p[0]+h*k, p[1]+w*j)
-                d = dsts[cur]
-                if d <= mx and (mx-d) % 2 == 0:
-                    real_sm += 1
         quad_sm = 0
         for (dr, dc) in diags:
             quadp = (p[0]+(repeat+dr)*h, p[1]+(repeat+dc)*w)
@@ -121,20 +114,4 @@ for row in range(h):
 
         cnt += quad_sm + linsm + init_sm
 
-p = (7, 1)
-print(p in mp)
-for k in range(0, 2*repeat+1):
-    for j in range(0, 2*repeat+1):
-        cur = (p[0]+h*k, p[1]+w*j)
-        print(f"{ dsts[cur]:4}", end=" ")
-    print()
-
-
-print(f"estimated sum = {cnt}")
-
-
-cnt = 0
-for cord, d in dsts.items():
-    if d <= mx and (d-mx) % 2 == 0:
-        cnt +=1
-print(cnt)
+print(f"{cnt}")

@@ -21,19 +21,15 @@ def comp_dists(mp, start):
     heapify(nxt)
     while len(nxt) > 0:
         d, cur = heappop(nxt)
-        print(d, cur)
         if cur in dsts:
             continue
         dsts[cur] = d
         for (dr, dc) in dirs:
             n = (dr+cur[0], dc+cur[1])
-            print(n)
             if n not in mp:
                 continue
             heappush(nxt, (d+1, n))
     return dsts
-
-
 
 
 mp = {}
@@ -53,7 +49,6 @@ for (row, line) in enumerate(lines):
 
 
 dsts = comp_dists(mp, start)
-print(dsts)
 cnt = 0
 mx = 500
 for cord, d in dsts.items():
